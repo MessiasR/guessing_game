@@ -10,25 +10,27 @@ btnTry.addEventListener('click', handleTryCLick)
 btnAgain.addEventListener('click', handleAgainClick)
 document.addEventListener('keydown', enterKey)
 
+
 function handleTryCLick(event) {
     event.preventDefault()
-
     const inputNumber = document.querySelector("#inputNumber")
+    if(Number(inputNumber.value) >= 0 && Number(inputNumber.value) <= 10) {
+        if(Number(inputNumber.value) == randomNumber) {
+            toggleScreen()
 
-    if(Number(inputNumber.value) == randomNumber) {
-        toggleScreen()
-        
-        if (xAttempts == 1) {
-            document.querySelector(".screen2 h2").innerText = `Acertou em ${xAttempts} tentativa!`
+            if (xAttempts == 1) {
+                document.querySelector(".screen2 h2").innerText = `Acertou em ${xAttempts} tentativa!`
+            }
+            else {
+                document.querySelector(".screen2 h2").innerText = `Acertou em ${xAttempts} tentativas!`
+            }
         }
-        else {
-            document.querySelector(".screen2 h2").innerText = `Acertou em ${xAttempts} tentativas!`
-        }
+        inputNumber.value = ""
+        xAttempts++
+    } else {
+        alert(`Você deve inserir um numero de 0 a 10`)
+        inputNumber.value = ""
     }
-
-    inputNumber.value = ""
-
-    xAttempts++
 }
 
 function handleAgainClick() {
@@ -37,7 +39,7 @@ function handleAgainClick() {
 
     randomNumber = Math.round(Math.random() * 10)
 }
-
+ 
 function toggleScreen() {
     screen1.classList.toggle("hide")
     screen2.classList.toggle("hide")
